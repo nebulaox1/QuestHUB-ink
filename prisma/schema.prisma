@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String            @id @default(cuid())
+  address         String            @unique
+  xp              Int               @default(0)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  questCompletions QuestCompletion[]
+}
+
+model Quest {
+  id              String            @id @default(cuid())
+  slug            String            @unique
+  title           String
+  description     String
+  category        String            // e.g., "DeFi", "Bridge", "Social"
+  difficulty      String            // "Easy", "Medium", "Hard"
+  xpReward        Int
+  
+  // Verification Fields
+  chainId         Int
+  contractAddress String
+  eventSignature  String            // e.g., "Swap(address,uint256...)"
+  minAmount       String?           // Optional minimum amount (in wei/smallest unit)
+  startBlock      BigInt?           // Optional start block to scan from
+  startTimestamp  DateTime?         // Optional start time
+  
+  completions     QuestCompletion[]
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model QuestCompletion {
+  id              String    @id @default(cuid())
+  questId         String
+  userAddress     String
+  txHash          String
+  xpAwarded       Int
+  completedAt     DateTime  @default(now())
+  
+  quest           Quest     @relation(fields: [questId], references: [id])
+  user            User      @relation(fields: [userAddress], references: [address])
+
+  @@unique([questId, userAddress]) // Prevent duplicate completions
+  @@index([userAddress])
+}
