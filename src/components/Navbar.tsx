@@ -54,15 +54,12 @@ export default function Navbar() {
                     <div className="flex items-center gap-3">
                         <Link href="/" className="flex items-center gap-3 group">
                             {/* Logo */}
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm group-hover:scale-105 transition-transform shadow-lg shadow-purple-500/30">
-                                IQ
-                            </div>
-                            <div className="flex flex-col">
-                                <span className="text-lg font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
-                                    Ink QuestHUB
+                            <div className="flex items-center gap-2">
+                                <span className="text-xl font-medium tracking-tight text-white/90">
+                                    Ink
                                 </span>
-                                <span className="text-xs text-purple-300/60 hidden sm:block">
-                                    Community hub for Inkchain
+                                <span className="text-xl font-bold tracking-tighter bg-gradient-to-r from-white via-purple-200 to-violet-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                                    QuestHUB
                                 </span>
                             </div>
                         </Link>

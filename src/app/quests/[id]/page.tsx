@@ -1,6 +1,24 @@
 import { QUESTS } from '@/data/quests';
 import Link from 'next/link';
 import QuestPageContent from '@/components/quest/QuestPageContent';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const { id } = await params;
+    const quest = QUESTS[id];
+
+    if (!quest) {
+        return {
+            title: 'Quest Not Found',
+        };
+    }
+
+    return {
+        title: quest.title,
+        openGraph: null,
+        twitter: null,
+    };
+}
 
 export default async function QuestPage({ params }: { params: Promise<{ id: string }> }) {
     // Await params in Server Component (Next.js 15+)
