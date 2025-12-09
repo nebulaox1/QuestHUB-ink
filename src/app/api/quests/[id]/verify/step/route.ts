@@ -68,7 +68,7 @@ export async function POST(
             } else {
                 return NextResponse.json({
                     success: false,
-                    error: result.error || 'Verification failed'
+                    error: (result as any).error || 'Verification failed'
                 });
             }
         } catch (verifyError: any) {

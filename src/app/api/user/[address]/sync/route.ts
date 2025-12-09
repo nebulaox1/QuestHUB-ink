@@ -21,7 +21,7 @@ export async function POST(
         // 2. Identify quests to check (Onchain, Active, Not Completed)
         const questsToCheck = QUEST_LIST.filter(quest =>
             quest.status === 'active' &&
-            quest.verification?.type === 'onchain' &&
+            (Array.isArray(quest.verification) ? quest.verification.some(v => v.type === 'onchain') : quest.verification?.type === 'onchain') &&
             !completedIds.includes(quest.id)
         );
 
