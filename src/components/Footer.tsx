@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Footer() {
+    console.log("BUILD DEBUG: V2 - Footer loaded");
     return (
         <footer className="bg-gradient-to-b from-transparent to-[#0d0618]/50">
             {/* Main Footer */}
